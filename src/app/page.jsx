@@ -3,19 +3,6 @@ import localFont from "next/font/local";
 import React, { useEffect, useRef } from "react";
 import Lenis from "@studio-freight/lenis";
 
-const lenis = new Lenis();
-
-lenis.on("scroll", (e) => {
-  console.log(e);
-});
-
-function raf(time) {
-  lenis.raf(time);
-  requestAnimationFrame(raf);
-}
-
-requestAnimationFrame(raf);
-
 const maziusReview = localFont({
   src: [
     {
@@ -32,9 +19,22 @@ const maziusReview = localFont({
 export default function Home() {
   const heroRef = useRef(null);
   const arrowRef = useRef(null);
+
   useEffect(() => {
     const hero = heroRef.current;
     const arrow = arrowRef.current;
+    const lenis = new Lenis();
+
+    // lenis smooth scroll
+    lenis.on("scroll", (e) => {
+    });
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
 
     // fade in & out header
     const fadeHeader = () => {
