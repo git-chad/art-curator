@@ -1,6 +1,20 @@
 "use client";
 import localFont from "next/font/local";
 import React, { useEffect, useRef } from "react";
+import Lenis from "@studio-freight/lenis";
+
+const lenis = new Lenis();
+
+lenis.on("scroll", (e) => {
+  console.log(e);
+});
+
+function raf(time) {
+  lenis.raf(time);
+  requestAnimationFrame(raf);
+}
+
+requestAnimationFrame(raf);
 
 const maziusReview = localFont({
   src: [
@@ -25,13 +39,13 @@ export default function Home() {
     // fade in & out header
     const fadeHeader = () => {
       const pixels = window.scrollY;
-      hero.style.opacity = 1 - (pixels / 330);
+      hero.style.opacity = 1 - pixels / 330;
     };
 
     const fadeArrow = () => {
       const pixels = window.scrollY;
-      arrow.style.opacity = 1 - (pixels / 175);
-    }
+      arrow.style.opacity = 1 - pixels / 175;
+    };
 
     // blob animations on scroll
     const checkBlobs = () => {
@@ -163,7 +177,7 @@ export default function Home() {
         </div>
       </main>
 
-      <img ref={arrowRef} className="arrow-icon" src="/icons/arrow.svg"/>
+      <img ref={arrowRef} className="arrow-icon" src="/icons/arrow.svg" />
 
       <div className="paintings">
         <section className="p-48">
